@@ -1,0 +1,80 @@
+------------------------------------------------
+Αυτο το καμματι κώδικα εβρισκε ολα τα pdf που ειχαν στο ονομα τους την λεξη "lab" και τα αντιγραφει σε ενα αλλον φακελο
+
+# Keep only .pdf files
+    pdfFiles=[]
+    for i in fileList:
+        #if (".pdf" in i.name and ("oc" in i.name or "OC" in i.name)):
+        if (".pdf" in i.name and "lab" in i.name):
+            pdfFiles.append(i)
+
+    dst="C:\\Users\\LaptopKws\\Desktop\\OC_pdfs"
+
+    for i in pdfFiles:
+        #print("file name:", i.name, "file path:",i.path)  
+        src=i.path
+        command="copy "+src+' '+dst
+        print(command)
+        os.system(command)
+
+
+------------------------------------------------
+Αυτο αναζητά μεσα στον φακελο και επιστρεφει το path του αρχειου που αναζητηθηκε
+searchFile=str(input("What file you want to search? "))
+    for i in fileList:
+        if i.name in searchFile:
+            print("Found the file you are looking for, and it's path is:", i.path)
+
+
+
+
+------------------------------------------------
+Αντέγραφε όλα τα περιεχόμενα απο τα .c και .sh αρχεια που φτίαξαμε κατα την διάρκεια του εξαμήνου στα λειτουργικα συστήματα
+fout=open("cIndex.txt","w", encoding="utf-8")
+    fileList=returnDir()
+    #print("Found the Files:")
+    for i in fileList:
+        if (".sh" in i.name):
+            tmpPath = i.path            
+            tmpFile = open(tmpPath,"r",encoding="utf-8")
+            fout.write("Folder: " + returnFolder(tmpPath) + " File: "+str(i.name)+'\n')
+            for j in tmpFile:
+                fout.write("    " + j)
+            fout.write("\n")
+            tmpFile.close()
+                
+        if (".c" in i.name):
+            tmpPath = i.path            
+            tmpFile = open(tmpPath,"r", encoding="utf-8")
+            fout.write("Folder: " + returnFolder(tmpPath) + " File: "+str(i.name)+'\n')
+            for j in tmpFile:
+                fout.write("    " + j)
+            fout.write("\n")
+            tmpFile.close()
+
+    
+
+    fout.close()
+
+------------------------------------------------
+Εύρισκε τα κατάλλιλα pdf και τα έννονε σε ένα
+from PyPDF2 import PdfFileMerger
+
+fileList=returnDir()
+pdfs = []
+
+print("Found the Files:")
+for i in fileList:
+    if ".pdf" not in i.name or "result" in i.name:
+        continue
+    pdfs.append(i.name)
+
+for i in range(1,4):
+    pdfs.append(pdfs.pop(1))
+
+merger = PdfFileMerger()
+for pdf in pdfs:
+    merger.append(pdf)
+
+merger.write("result.pdf")
+merger.close()
