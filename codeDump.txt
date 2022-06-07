@@ -37,7 +37,7 @@ fout=open("cIndex.txt","w", encoding="utf-8")
         if (".sh" in i.name):
             tmpPath = i.path            
             tmpFile = open(tmpPath,"r",encoding="utf-8")
-            fout.write("Folder: " + returnFolder(tmpPath) + " File: "+str(i.name)+'\n')
+            fout.write("Folder: " + tmpPath.split("\\")[-2] + " File: "+str(i.name)+'\n')
             for j in tmpFile:
                 fout.write("    " + j)
             fout.write("\n")
@@ -46,7 +46,7 @@ fout=open("cIndex.txt","w", encoding="utf-8")
         if (".c" in i.name):
             tmpPath = i.path            
             tmpFile = open(tmpPath,"r", encoding="utf-8")
-            fout.write("Folder: " + returnFolder(tmpPath) + " File: "+str(i.name)+'\n')
+            fout.write("Folder: " + tmpPath.split("\\")[-2] + " File: "+str(i.name)+'\n')
             for j in tmpFile:
                 fout.write("    " + j)
             fout.write("\n")
