@@ -1,7 +1,7 @@
 # file-search
-A recursive function that returns all files in a file tree (WIP)
+A recursive function that returns all files in of the lower file tree 
 
-(Some comments of this repo are still in Greek and the names of the files are going to change)
+(Some comments of this repo may still be in Greek that's because i forgot to change them)
 
 The core part out of this repo is the function returnDir in the fileSearch.py file.
   This function returns all the file of a file tree in a list (a queue with the "deepest" files first)
