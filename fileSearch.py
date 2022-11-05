@@ -1,15 +1,12 @@
 import os
 
-
-
 def returnDir(path='', fileList=[]):
     """ Returns a list with all files in the directory, seaches recusevly,
         filelist: (Array) List with the files of the direcotry in type of os.DirEntry 
-        path: Custom directory path"""
+        path: Custom directory path, if left empty then execution path is taken as default """
     if path=='':
         path=os.getcwd()
 
-    #print("Searching on directory:", path)
     dirIt=os.scandir(path)
     
     for i in dirIt:
@@ -19,22 +16,20 @@ def returnDir(path='', fileList=[]):
 
         # add files to fileList
         if i.is_file():
-            #print("Appending file,", i.name, "from directory:", i.path)
             fileList.append(i)
         
         # Recurs to other directories
         if i.is_dir():
-            #print("Recursing to:", i.path)
             returnDir(i.path, fileList)
     
     return fileList
 
 
 def main():
-    """ Τα αρχεια αποθυκευονται στον πινακα fileList, το script αυτο ειναι σαν template, 
-        Κατω απο το fileList=returnDir() γραφεται ο κωδικας για εκεινη την περιπτωση 
-        Ήδη γραμμενα κομμάτια κώδικα ειανι στο αρχειο codeDump.txt"""
-
+    """ After you call the function returnDir() you have all the files of the directories current and below the 'path' parameter
+        in an array.
+        With this array you can create custom scripts to manipuate the files and their content, examples in the codeDump.txt file.    
+    """
     fileList=returnDir()
     print("Found the files: ")
     for i in fileList:
@@ -43,16 +38,6 @@ def main():
 
 
     # input("Enter a key to continiue")
-
-
-    
-    
-
-
-
-
-
-
 
 if __name__=='__main__':
     main()
